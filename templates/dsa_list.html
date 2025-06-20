@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}DSA List{% endblock %}
+
+{% block content %}
+<div class="row animate-fade">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-white">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-user-tie me-3 text-primary" style="font-size: 1.5rem;"></i>
+                        <div>
+                            <h4 class="mb-0">DSA Management</h4>
+                            <p class="text-muted mb-0">Total: {{ dsa.count }} DSAs registered</p>
+                        </div>
+                    </div>
+                    <a href="{% url 'dsa_create' %}" class="btn btn-primary">
+                        <i class="fas fa-plus me-2"></i>Register New DSA
+                    </a>
+                </div>
+            </div>
+            
+            <div class="card-body">
+                {% if dsa %}
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>DSA Name</th>
+                                <th>Phone Number</th>
+                                <th>DSA Code</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for ds in dsa %}
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 36px; height: 36px;">
+                                            {{ ds.dsa_name|first|upper }}
+                                        </div>
+                                        <strong>{{ ds.dsa_name }}</strong>
+                                    </div>
+                                </td>
+                                <td>{{ ds.dsa_phone_number }}</td>
+                                <td>
+                                    <span class="badge bg-primary">{{ ds.dsa_code }}</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex gap-2">
+                                        <a href="#" class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-sm btn-outline-warning">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="text-center py-5">
+                    <i class="fas fa-user-tie fa-3x text-muted mb-3"></i>
+                    <h5>No DSAs Registered</h5>
+                    <p class="text-muted">Click the button above to register your first DSA</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

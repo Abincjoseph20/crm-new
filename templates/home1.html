@@ -1,0 +1,298 @@
+{% extends "base.html" %}
+
+{% block title %}Create Customer{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Page Header -->
+    <div class="col-12 mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <span class="badge bg-primary">Today: {% now "F j, Y" %}</span>
+            </div>
+        </div>
+        <hr class="mt-2">
+    </div>
+    
+    <!-- Key Metrics Cards -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card dashboard-card border-start border-primary border-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-muted mb-2">cureent repo</h6>
+                        <h3 class="mb-0">4.62</h3>
+                    </div>
+                    <div class="bg-primary bg-opacity-10 p-3 rounded">
+                        <i class="fas fa-hand-holding-usd text-primary fa-2x"></i>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <span class="text-success fw-bold">+12.5% <i class="fas fa-arrow-up"></i></span>
+                    <span class="text-muted ms-2">vs last month</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card dashboard-card border-start border-success border-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-muted mb-2">Disbursed</h6>
+                        <h3 class="mb-0">₹42.8M</h3>
+                    </div>
+                    <div class="bg-success bg-opacity-10 p-3 rounded">
+                        <i class="fas fa-rupee-sign text-success fa-2x"></i>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <span class="text-success fw-bold">+8.3% <i class="fas fa-arrow-up"></i></span>
+                    <span class="text-muted ms-2">vs last month</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card dashboard-card border-start border-warning border-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-muted mb-2">Pending Approval</h6>
+                        <h3 class="mb-0">84</h3>
+                    </div>
+                    <div class="bg-warning bg-opacity-10 p-3 rounded">
+                        <i class="fas fa-clock text-warning fa-2x"></i>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <span class="text-danger fw-bold">-3.2% <i class="fas fa-arrow-down"></i></span>
+                    <span class="text-muted ms-2">vs last month</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card dashboard-card border-start border-danger border-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-muted mb-2">Rejected</h6>
+                        <h3 class="mb-0">27</h3>
+                    </div>
+                    <div class="bg-danger bg-opacity-10 p-3 rounded">
+                        <i class="fas fa-times-circle text-danger fa-2x"></i>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <span class="text-danger fw-bold">+2.1% <i class="fas fa-arrow-up"></i></span>
+                    <span class="text-muted ms-2">vs last month</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "loan_status_distribution.html" %}
+
+<div class="row">
+    <!-- Recent Activities -->
+    <div class="col-lg-6 mb-4">
+        <div class="card dashboard-card h-100">
+            <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Customer Creation</h5>
+                <a href="{% url 'list' %}" class="btn btn-sm btn-outline-primary">View All</a>
+            </div>
+            <div class="card-body p-0">
+                <div class="list-group list-group-flush">
+                    {% for activity in recent_activities %}
+                    <div class="list-group-item border-0 py-3">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                                <div class="bg-primary bg-opacity-10 p-2 rounded-circle">
+                                    <i class="fas fa-file-alt text-primary"></i>
+                                </div>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="mb-1">{{ activity.title }}</h6>
+                                <p class="mb-0 text-muted small">{{ activity.description }}</p>
+                            </div>
+                            <span class="text-muted small">{{ activity.time }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Upcoming Tasks -->
+    <div class="col-lg-6 mb-4">
+        <div class="card dashboard-card h-100">
+            <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Upcoming Tasks</h5>
+                <a href="{% url 'task_list' %}" class="btn btn-sm btn-outline-primary">View All</a>
+            </div>
+            <div class="card-body p-0">
+                <div class="list-group list-group-flush">
+                    {% for task in upcoming_tasks %}
+                    <div class="list-group-item border-0 py-3">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                                <div class="p-2 rounded-circle {% if task.priority == 'high' %}bg-danger bg-opacity-10{% elif task.priority == 'medium' %}bg-warning bg-opacity-10{% else %}bg-success bg-opacity-10{% endif %}">
+                                    <i class="fas {% if task.priority == 'high' %}fa-exclamation-circle text-danger{% elif task.priority == 'medium' %}fa-exclamation-triangle text-warning{% else %}fa-check-circle text-success{% endif %}"></i>
+                                </div>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="mb-1">{{ task.title }}</h6>
+                                <p class="mb-0 text-muted small">Due: {{ task.due_date|date:"M d, Y" }}</p>
+                            </div>
+                            <span class="badge {% if task.status == 'completed' %}bg-success{% elif task.status == 'in_progress' %}bg-warning{% else %}bg-secondary{% endif %}">
+                                {{ task.get_status_display }}
+                            </span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+   
+</div>
+
+<!-- Add this to your extra_js block -->
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Status Distribution Chart
+    const ctx = document.getElementById('statusChart').getContext('2d');
+
+    const statusChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [
+                "Login Submitted",
+                "Login Completed", 
+                "Tec Completed",
+                "Legal Completed",
+                "Disbursed",
+                "Rejected"
+            ],
+            datasets: [{
+                label: "Loan Status (%)",
+                data: [
+                    {{ percentages.login_submit|default:"0" }},
+                    {{ percentages.login_complete|default:"0" }},
+                    {{ percentages.tec_completed|default:"0" }},
+                    {{ percentages.legal_completed|default:"0" }},
+                    {{ percentages.disp|default:"0" }},
+                    {{ percentages.reject|default:"0" }}
+                ],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(75, 192, 192, 0.7)', 
+                    'rgba(255, 206, 86, 0.7)',
+                    'rgba(153, 102, 255, 0.7)',
+                    'rgba(40, 167, 69, 0.7)',
+                    'rgba(220, 53, 69, 0.7)'
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(255, 206, 86, 1)', 
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(40, 167, 69, 1)',
+                    'rgba(220, 53, 69, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return context.parsed.y + "% (" + 
+                                   Math.round((context.parsed.y * {{ total|default:"0" }}) / 100) + 
+                                   " customers)";
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            return value + "%";
+                        }
+                    },
+                    max: 100
+                }
+            }
+        }
+    });
+
+    // Product Mix Chart (Fixed to use dynamic data)
+const productCtx = document.getElementById('productChart').getContext('2d');
+const productChart = new Chart(productCtx, {
+    type: 'doughnut',
+    data: {
+        labels: ['HL', 'PL', 'BL', 'CL', 'RF'],
+        datasets: [{
+            data: [
+                {{ product_percentages.HL|default:"0" }},
+                {{ product_percentages.PL|default:"0" }},
+                {{ product_percentages.BL|default:"0" }},
+                {{ product_percentages.CL|default:"0" }},
+                {{ product_percentages.RF|default:"0" }}
+            ],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.7)',
+                'rgba(255, 99, 132, 0.7)',
+                'rgba(255, 206, 86, 0.7)',
+                'rgba(75, 192, 192, 0.7)',
+                'rgba(153, 102, 255, 0.7)'
+            ],
+            borderColor: [
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'bottom',
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        return context.label + ': ' + context.parsed + '% (' +
+                                Math.round((context.parsed * {{ product_total|default:"0" }}) / 100) +
+                                ' customers)';
+                    }
+                }
+            }
+        },
+        cutout: '70%'
+     }
+    });
+</script>
+{% endblock %}
+{% endblock %}
