@@ -8,15 +8,15 @@ postgrass implimation
 
 Not installed search in dsa
 
-notification sould have to add the befor 40m
+notification sould have to add the befor 40m 
 
-pagenation not added
+pagenation not added 
 
-diffrenciate dsa and self case
+diffrenciate dsa and self case 
 
-dsa edit and delete
+dsa edit and delete 
 
-customer tranfer to dsa edit
+customer tranfer to dsa edit 
 
 details page not added the dsa detais
 

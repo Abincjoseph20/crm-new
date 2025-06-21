@@ -16,7 +16,7 @@ from datetime import datetime, timedelta
 from django.db.models import Count
 from django.http import JsonResponse
 # from .models import Loan  # Import your Loan model
-
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from datetime import datetime
 from .models import Customer, Task  # Make sure to import your models
@@ -30,6 +30,7 @@ def aboutus(request):
 def contact(request):
     return render(request,"contact.html")
 
+@login_required
 def Home(request):
     # Step 1: Define the possible status choices
     statuses = [
@@ -44,7 +45,7 @@ def Home(request):
     # Step 2: Count how many customers exist for each status
     status_counts = {}
     for status in statuses:
-        count = Customer.objects.filter(status=status).count()
+        count = Customer.objects.filter(user=request.user,status=status).count()
         status_counts[status] = count
 
     # Step 3: Calculate the total number of customers (all statuses combined)
@@ -73,7 +74,7 @@ def Home(request):
     
     products_counts = {}
     for product in products:
-        pro_count = Customer.objects.filter(product=product).count()
+        pro_count = Customer.objects.filter(user=request.user,product=product).count()
         products_counts[product] = pro_count
 
     # Step 3: Calculate the total number of customers (all statuses combined)
@@ -90,7 +91,7 @@ def Home(request):
         product_percentages[product] = pro_percentage
         
         
-        context = {
+    context = {
         'counts': status_counts,            # Dictionary of status counts
         'percentages': status_percentages,  # Dictionary of status percentages
         'total': total,                     # Total number of customers
@@ -122,6 +123,7 @@ def create_customer(request):
 
         # Create and save a new Customer instance
         customer = Customer.objects.create(
+            user=request.user,
             f_name=f_name,
             l_name=l_name,
             phone_num=phone_num,
@@ -147,17 +149,17 @@ def create_customer(request):
 
 
 def customer_list(request):
-    customers = Customer.objects.all()
+    customers = Customer.objects.filter(user=request.user)
     return render(request, 'list.html', {'customers': customers})
 
 
 def details(request,pk):
-    fom = get_object_or_404(Customer,pk=pk)
+    fom = get_object_or_404(Customer,pk=pk,user=request.user)
     return render(request,'details.html',{'fom':fom})
 
 
 def edit_customer(request, pk):
-    customer = get_object_or_404(Customer, pk=pk)
+    customer = get_object_or_404(Customer, pk=pk,user=request.user)
     if request.method == 'POST':
         customer.f_name = request.POST.get('f_name')
         customer.l_name = request.POST.get('l_name')
@@ -183,7 +185,7 @@ def edit_customer(request, pk):
 
 
 def delete(request, pk):
-    customer = get_object_or_404(Customer, pk=pk)
+    customer = get_object_or_404(Customer, pk=pk,user=request.user)
     if request.method == 'POST':
         customer.delete()
         return redirect('list')
@@ -192,21 +194,21 @@ def delete(request, pk):
 
 class Bank_Category(View):
     def get(self, request, val):
-        customers = Customer.objects.filter(bank=val)  
+        customers = Customer.objects.filter(user=request.user,bank=val)  
         titles = customers.values('f_name', 'l_name')  
         return render(request, 'Bank_category.html', {'customers': customers, 'titles': titles})
     
     
 class Pdoduct_Catogory(View):
     def get(self,request,val):
-        product = Customer.objects.filter(product=val)
+        product = Customer.objects.filter(user=request.user,product=val)
         titles = product.values('f_name','l_name')
         return render(request,'Product_catogory.html',{'product': product, 'titles': titles})
     
     
 class status_filter(View):
     def get(self,request,status):
-        customers =Customer.objects.filter(status=status)
+        customers =Customer.objects.filter(user=request.user,status=status)
         return render(request,'status_filter.html',{'customers':customers,'status':status})
 
     
@@ -214,7 +216,7 @@ def search(request):
     if 'keyword' in request.GET:
         keyword = request.GET['keyword']
         if keyword:
-            customers = Customer.objects.order_by('-created_date').filter(f_name__icontains=keyword)
+            customers = Customer.objects.filter(user=request.user).order_by('-created_date').filter(f_name__icontains=keyword)
         else:
             return redirect('list')
     context = {
@@ -354,7 +356,7 @@ class get_count(View):
             'reject'
         ]
         status_counts = {
-        status: Customer.objects.filter(status=status).count()
+        status: Customer.objects.filter(user=request.user,status=status).count()
         for status in statuses 
         }
         total = sum(status_counts.values())

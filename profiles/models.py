@@ -1,5 +1,7 @@
 from django.db import models
 # # Create your models here.
+from accounts .models import Account
+
 
 class DSA(models.Model):
     dsa_name = models.CharField(max_length=50)
@@ -41,6 +43,8 @@ TYPE_CHOICES = (
 )
 
 class Customer(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.CASCADE, null=True, blank=True,related_name='customers' )
+    
     f_name = models.CharField(max_length=50)
     l_name = models.CharField(max_length=50)
     phone_num = models.IntegerField()
