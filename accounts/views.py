@@ -61,7 +61,7 @@ def register(request):
     context = {
         'form': form,
     }
-    return render(request, 'accounts/register.html', context)
+    return render(request, 'Accounts/register.html', context)
 
 
 
@@ -119,7 +119,7 @@ def login(request):
         else:
             messages.error(request, 'Invalid login credentials')
             return redirect('login')
-    return render(request, 'accounts/login.html')
+    return render(request, 'Accounts/login.html')
 
 
 
