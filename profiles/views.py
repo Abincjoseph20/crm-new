@@ -22,13 +22,13 @@ from datetime import datetime
 from .models import Customer, Task  # Make sure to import your models
 
 def Index(request):
-    return render(request,"index.html")
+    return render(request,"base/index.html")
 
 def aboutus(request):
-    return render(request,"aboutus.html")
+    return render(request,"base/aboutus.html")
 
 def contact(request):
-    return render(request,"contact.html")
+    return render(request,"base/contact.html")
 
 @login_required
 def Home(request):
@@ -376,11 +376,5 @@ class get_count(View):
             'total': total
         }
         return render(request,'count.html',context)
-
-
-    
-    # def status_qty(self, request):
-    #     # You can similarly add context for this view if needed.
-    #     return render(request, 'loan_status_distribution.html')
 
 

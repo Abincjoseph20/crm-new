@@ -1,0 +1,269 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | NexusCRM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href='{% static "css/style.css" %}'></link>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <i class="fas fa-chart-line"></i>
+                    Nexus<span>CRM</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="{% url 'home' %}"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="{% url 'aboutus' %}"><i class="fas fa-info-circle"></i> About Us</a></li>
+                    <li><a href="{% url 'contact' %}"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                    <li><a href="{% url 'register' %}" class="btn"><i class="fas fa-sign-in-alt"></i> Sign In</a></li>
+                </ul>
+                
+                <div class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="{% url 'home' %}"><i class="fas fa-home"></i> Home</a>
+        <a href="{% url 'aboutus'%}"><i class="fas fa-info-circle"></i> About Us</a>
+        <a href="{% url  'contact'  %}"><i class="fas fa-envelope"></i> Contact Us</a>
+        <a href="{% url 'register' %}" class="btn"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+    </div>
+    
+    <section class="contact-hero">
+        <div class="container">
+            <h1 class="fade-in">Get In Touch</h1>
+            <p class="fade-in delay-1">We'd love to hear from you! Reach out to our team for any questions or inquiries.</p>
+        </div>
+    </section>
+    
+    <section class="contact-section">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="slide-up">Contact Information</h2>
+                <p class="slide-up delay-1">Choose your preferred method to connect with us</p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-card slide-up">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Our Location</h3>
+                            <p>123 Business Avenue, Suite 500<br>San Francisco, CA 94107</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card slide-up delay-1">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Phone Number</h3>
+                            <p>
+                                <a href="tel:+18005551234">+1 (800) 555-1234</a><br>
+                                <a href="tel:+18005554321">+1 (800) 555-4321</a>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card slide-up delay-2">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email Address</h3>
+                            <p>
+                                <a href="mailto:info@nexuscrm.com">info@nexuscrm.com</a><br>
+                                <a href="mailto:support@nexuscrm.com">support@nexuscrm.com</a>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card slide-up delay-3">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Working Hours</h3>
+                            <p>
+                                Monday - Friday: 9:00 AM - 6:00 PM<br>
+                                Saturday: 10:00 AM - 4:00 PM<br>
+                                Sunday: Closed
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form glass-card slide-up">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="map-section">
+        <div class="container">
+            <div class="map-container slide-up">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.788009329567!2d-122.40652092426764!3d37.78351347189984!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085808f4f1d0f9f%3A0xe7695b6d42e9f725!2s123%20Business%20Ave%2C%20San%20Francisco%2C%20CA%2094107%2C%20USA!5e0!3m2!1sen!2s!4v1689876543210!5m2!1sen!2s" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+    
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="slide-up">Frequently Asked Questions</h2>
+                <p class="slide-up delay-1">Find quick answers to common questions about our CRM platform</p>
+            </div>
+            
+            <div class="faq-container">
+                <div class="faq-item slide-up">
+                    <div class="faq-question">
+                        <span>How do I get started with NexusCRM?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Getting started is easy! Simply sign up for an account on our website, choose your preferred plan, and follow the onboarding wizard to set up your account. Our team is also available 24/7 to help you with the setup process if needed.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item slide-up delay-1">
+                    <div class="faq-question">
+                        <span>What payment methods do you accept?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and bank transfers. All transactions are securely processed through our PCI-compliant payment gateway.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item slide-up delay-2">
+                    <div class="faq-question">
+                        <span>Can I integrate NexusCRM with other tools?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! NexusCRM offers seamless integrations with popular tools like Gmail, Outlook, Slack, Zoom, and many more through our API. We also support Zapier for connecting with hundreds of additional applications.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item slide-up delay-3">
+                    <div class="faq-question">
+                        <span>Is there a mobile app available?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! NexusCRM has native iOS and Android apps available for download in their respective app stores. The mobile app provides full functionality so you can manage your business on the go.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item slide-up">
+                    <div class="faq-question">
+                        <span>How secure is my data with NexusCRM?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Data security is our top priority. We use enterprise-grade encryption (AES-256), regular backups, two-factor authentication, and comply with GDPR regulations. Your data is stored in secure, SOC 2 Type II certified data centers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About NexusCRM</h3>
+                    <p>NexusCRM is a powerful customer relationship management platform designed to help businesses of all sizes streamline their operations and grow their customer base.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="{% url 'home' %}"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="{% url 'aboutus'%}"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="{% url  'contact' %}"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Pricing</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Features</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Help Center</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Documentation</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> API Reference</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Community Forum</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> System Status</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Business Avenue, San Francisco, CA 94107</p>
+                    <p><i class="fas fa-phone"></i> +1 (800) 555-1234</p>
+                    <p><i class="fas fa-envelope"></i> info@nexuscrm.com</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 NexusCRM. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src='{% static "js/scripts.js" %}'></script>
+</body>
+</html>

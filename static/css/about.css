@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us | NexusCRM</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
+:root {
             --primary: #4361ee;
             --secondary: #3f37c9;
             --accent: #4895ef;
@@ -464,6 +456,57 @@
             transform: translateY(-5px);
         }
         
+        /* Values Section */
+        .values-section {
+            padding: 4rem 0;
+            background-color: var(--light);
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        .value-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .value-card h3 {
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .value-card p {
+            color: #666;
+            line-height: 1.7;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+        
         /* CTA Section */
         .cta-section {
             padding: 4rem 0;
@@ -634,6 +677,10 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             
+            .values-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
             .footer-content {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -647,6 +694,7 @@
             .about-section,
             .stats-section,
             .team-section,
+            .values-section,
             .cta-section {
                 padding: 6rem 0;
             }
@@ -674,6 +722,10 @@
             
             .team-info {
                 padding: 2rem;
+            }
+            
+            .values-grid {
+                grid-template-columns: repeat(3, 1fr);
             }
             
             .footer-content {
@@ -756,161 +808,3 @@
                 padding: 0.5rem;
             }
         }
-    </style>
-</head>
-<body>
-    <div class="bg-animation"></div>
-    
-    <header id="header">
-        <div class="container">
-            <nav>
-                <a href="#" class="logo">
-                    <i class="fas fa-chart-line"></i>
-                    Nexus<span>CRM</span>
-                </a>
-                <ul class="nav-links">
-                    <li><a href="{% url 'home' %}"><i class="fas fa-home"></i> Home</a></li>
-                    <li><a href="{% url 'aboutus'  %}"><i class="fas fa-info-circle"></i> About Us</a></li>
-                    <li><a href="{% url 'contact' %}"><i class="fas fa-envelope"></i> Contact Us</a></li>
-                    <li><a href="{% url 'register' %}" class="btn"><i class="fas fa-sign-in-alt"></i> Sign In</a></li>
-                </ul>
-                
-                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </nav>
-        </div>
-        
-        <div class="mobile-menu" id="mobileMenu">
-            <ul class="mobile-nav-links">
-            <li><a href="{% url 'home' %}"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="{% url 'aboutus'  %}"><i class="fas fa-info-circle"></i> About Us</a></li>
-            <li><a href="{% url 'contact' %}"><i class="fas fa-envelope"></i> Contact Us</a></li>
-            <li><a href="{% url 'register' %}" class="btn"><i class="fas fa-sign-in-alt"></i> Sign In</a></li>
-        </ul>
-        </div>
-    </header>
-    
-    <section class="about-hero">
-        <div class="container">
-            <h1 class="fade-in">Our Story, Your Success</h1>
-            <p class="fade-in delay-1">We're revolutionizing customer relationship management with innovative technology and a passion for helping businesses thrive.</p>
-        </div>
-    </section>
-    
-    <section class="about-section">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-content">
-                    <h3 class="slide-up">Who We Are</h3>
-                    <p class="slide-up delay-1">Founded in 2015, NexusCRM began as a small team of CRM experts who saw the need for a more intuitive, powerful customer management solution. Today, we serve thousands of businesses worldwide with our cutting-edge platform.</p>
-                    <p class="slide-up delay-2">Our mission is simple: to provide businesses with the tools they need to build stronger customer relationships, streamline operations, and drive sustainable growth.</p>
-                </div>
-                <div class="about-image slide-up delay-1">
-                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Our Team">
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section class="stats-section">
-        <div class="container">
-            <div class="section-title">
-                <h2 class="slide-up">By The Numbers</h2>
-                <p class="slide-up delay-1">Our impact in the CRM industry speaks for itself</p>
-            </div>
-            
-            <div class="stats-grid">
-                <div class="stat-card slide-up">
-                    <div class="stat-number">
-                        <i class="fas fa-users"></i>
-                        5K+
-                    </div>
-                    <h4>Happy Clients</h4>
-                    <p>Businesses trusting our platform</p>
-                </div>
-                
-                <div class="stat-card slide-up delay-1">
-                    <div class="stat-number">
-                        <i class="fas fa-globe"></i>
-                        40+
-                    </div>
-                    <h4>Countries</h4>
-                    <p>Where our clients operate</p>
-                </div>
-                
-                <div class="stat-card slide-up delay-2">
-                    <div class="stat-number">
-                        <i class="fas fa-chart-line"></i>
-                        98%
-                    </div>
-                    <h4>Retention Rate</h4>
-                    <p>Of customers stay with us</p>
-                </div>
-                
-                <div class="stat-card slide-up delay-3">
-                    <div class="stat-number">
-                        <i class="fas fa-lightbulb"></i>
-                        50+
-                    </div>
-                    <h4>Innovations</h4>
-                    <p>Patents and unique features</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section class="team-section">
-        <div class="container">
-            <div class="section-title">
-                <h2 class="slide-up">Meet The Leadership</h2>
-                <p class="slide-up delay-1">The brilliant minds behind NexusCRM</p>
-            </div>
-            
-            <div class="team-grid">
-                <div class="team-card slide-up">
-                    <div class="team-image">
-                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="CEO">
-                    </div>
-                    <div class="team-info">
-                        <h3>Sarah Johnson</h3>
-                        <p>CEO & Founder</p>
-                        <div class="team-social">
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fas fa-envelope"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="team-card slide-up delay-1">
-                    <div class="team-image">
-                        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="CTO">
-                    </div>
-                    <div class="team-info">
-                        <h3>Michael Chen</h3>
-                        <p>Chief Technology Officer</p>
-                        <div class="team-social">
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fab fa-github"></i></a>
-                            <a href="#"><i class="fas fa-envelope"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="team-card slide-up delay-2">
-                    <div class="team-image">
-                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=761&q=80" alt="CMO">
-                    </div>
-                    <div class="team-info">
-                        <h3>Jessica Williams</h3>
-                        <p>Chief Marketing Officer</p>
-                        <div class="team-social">
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fas fa-envelope"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
