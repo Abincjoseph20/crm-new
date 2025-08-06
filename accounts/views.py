@@ -100,7 +100,7 @@ def verify_otp(request):
         else:
             messages.error(request, 'Invalid OTP. Please try again.')
 
-    return render(request, 'accounts/verify_otp.html')
+    return render(request, 'Accounts/verify_otp.html')
 
 
 def login(request):
